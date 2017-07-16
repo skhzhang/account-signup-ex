@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+    <style>
+      header {
+        margin-top: 5em;
+        margin-bottom: 5em;
+      }
+      .text-desc {
+        font-size: 12px;
+      }
+    </style>
+
+    <title>Sign up for an account</title>
+  </head>
+  <body ng-app="restaurant" ng-strict-di>
+
+    <header>
+      <div class="ui main text container">
+        <h1 class="ui center aligned header">Sign up for an account</h1>
+        <p>Simple web app exercise for account registration. Note that there is no security whatsoever. This should only ever be deployed locally and you should only use dummy data. </p>
+        <p>For more details, see <a href="https://github.com/skhzhang/account-signup-ex" target="_blank" rel="noopener noreferrer">https://github.com/skhzhang/account-signup-ex</a>.</p>
+      </div>
+    </header>
+
+    <form class="ui form container" id="account" novalidate>
+      <h4 class="ui dividing header">Account Information</h4>
+      <div class="field">
+        <div class="two fields">
+          <div class="required field username">
+            <label>Username</label>
+            <input  name="username" 
+                    pattern='[A-z0-9]{5,20}'
+                    placeholder="eg. abc@xyz.com" 
+                    type="text" 
+                    required>
+            <p class="text-desc">Must be alphanumeric. <br> Must have a minimum length of 5 characters.</p>
+          </div>
+
+          <div class="required field password">
+            <label>Password</label>
+            <input  name="password" 
+                    pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}'
+                    placeholder="Something unique" 
+                    type="password" 
+                    required>
+            <p class="text-desc">Must contain at least 1 number, 1 uppercase, and 1 lowercase letter. <br> Must have a minimum length of 8 characters.</p>
+          </div>
+        </div>
+      </div>
+      <button class="ui button" tabindex="0">Register</button>
+      <div class="ui error message" id="message" aria-live="polite">
+        <div class="header">Action Forbidden</div>
+        <p>There was an error!</p>
+      </div>
+    </form>
+
+    <footer class="panel-footer">
+    </footer>
+
+    <!-- Libs -->
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="./semantic/dist/semantic.js"></script>
+    <script src="./index.js"></script>
+
+  </body>
+
+</html>
