@@ -56,8 +56,8 @@ app.post('/accountNew', function(req, res){
         console.log(`Account \'${req.body.username}\' already exists.`);
         res.send({status : 'FAILURE', message : `An account with the username \'${newAccount.username}\' already exists.`});
     }
-    else if (!accountFile['accounts'].find(accountExists)) {
-        // If this account has a unique username, add it to the accounts file.
+    else {
+        // If this account passes the validation and has a unique username, add it to the accounts file.
 
         accountFile['accounts'].push(newAccount);
 
@@ -70,9 +70,6 @@ app.post('/accountNew', function(req, res){
             console.log(`Account \'${req.body.username}\' successfully registered.`);
             res.send({status : 'SUCCESS', message : `Account \'${newAccount.username}\' successfully registered.`});
         })
-    }
-    else {
-
     }
 
 });
