@@ -1,9 +1,11 @@
 # account-signup-ex
-This is a static website for simple account registration created as an exercise. 
+This is a web app for simple account registration created as an exercise. 
 
 It consists of a web page that asks for some account information (username & password). If the user clicks submit and passes the form validation, the information will be sent to the server. The server will then append the username & password to a JSON file.
 
-There is NO SECURITY whatsoever. This application should only be deployed locally and you should only use dummy data. Passwords are stored in plaintext.
+There is limited security. This application should only be deployed locally and you should only use dummy data. Passwords are stored in plaintext.
+
+Form validation is done on both the front-end and back-end. Front-end form validation allows immediate feedback on whether the username & password meets the requirements and limits the total number of requests to the server. However, if the user decides to be sneaky and disable front-end validation, the server will test the username & password as well.
 
 ## Technology
 

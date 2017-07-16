@@ -16,7 +16,7 @@ app.use( bodyParser.urlencoded({
 app.use( bodyParser.json() );
 
 app.listen(3000, function() {
-    console.log('listening')
+    console.log('Listening for requests...')
 });
 
 app.post('/accountNew', function(req, res){
@@ -37,8 +37,27 @@ app.post('/accountNew', function(req, res){
         accountFile["accounts"] = [];
     }
 
-    // If this account has a unique username, add it to the accounts file.
-    if (!accountFile['accounts'].find(accountExists)) {
+    if (!(/[A-z0-9]{5,20}/).test(newAccount.username) || 
+        !(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}/).test(newAccount.password) || 
+        (newAccount.username.length > 20) || 
+        (newAccount.password.length > 20)) {
+        // Server-side form validation.
+        // Username and/or password does not fulfill constraints.
+
+        // Send message that the username/password failed constraints.
+        console.log(`Username and/or password failed form validation.`);
+        res.send({status : 'FAILURE', message : `Username and/or password does not fulfill constraints required.`});
+
+    }
+    else if (accountFile['accounts'].find(accountExists)) {
+        // Account with this username already exists.
+
+        // Send message that the account already exists.
+        console.log(`Account \'${req.body.username}\' already exists.`);
+        res.send({status : 'FAILURE', message : `An account with the username \'${newAccount.username}\' already exists.`});
+    }
+    else if (!accountFile['accounts'].find(accountExists)) {
+        // If this account has a unique username, add it to the accounts file.
 
         accountFile['accounts'].push(newAccount);
 
@@ -47,18 +66,13 @@ app.post('/accountNew', function(req, res){
                 return console.log('Error encountered:', err);
             }
 
-            console.log(`Account \'${req.body.username}\' successfully registered.`);
-
             // Send message that the account was successfully registered.
+            console.log(`Account \'${req.body.username}\' successfully registered.`);
             res.send({status : 'SUCCESS', message : `Account \'${newAccount.username}\' successfully registered.`});
         })
     }
     else {
 
-        console.log(`Account \'${req.body.username}\' already exists.`);
-
-        // Send message that the account already exists.
-        res.send({status : 'FAILURE', message : `An account with the username \'${newAccount.username}\' already exists.`});
     }
 
 });

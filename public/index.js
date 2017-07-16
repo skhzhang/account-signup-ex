@@ -62,7 +62,7 @@
                 resultErrorMsg += "<li>Username must contain at least 5 characters.</li>";
                 showErrorMsg = true;
             }
-            else if (!(/.{5,20}/).test(usernameVal)) {
+            else if (!(/.{5,20}/).test(usernameVal) || (usernameVal.length > 20)) {
                 // Cannot contain more than 20 characters.
 
                 resultErrorMsg += "<li>Username cannot contain more than 20 characters.</li>";
@@ -109,6 +109,11 @@
             resultErrorMsg += resultErrorMsg !== "<ul>" ? "" : "There is an unknown error."; // Passed tests but not valid.
 
             resultErrorMsg += "</ul>";
+
+            $('#message').removeClass('success');
+            $('#message').addClass('error');
+
+            messageHead.innerHTML = 'Action Forbidden';
             messageBody.innerHTML = resultErrorMsg;
             messageElem.style.display = "block"; // Show the error message if there are any errors.
         }
