@@ -5,7 +5,7 @@ It consists of a web page that asks for some account information (username & pas
 
 There is limited security. This application should only be deployed locally and you should only use dummy data. Passwords are stored in plaintext.
 
-Form validation is done on both the front-end and back-end. Front-end form validation allows immediate feedback on whether the username & password meets the requirements and limits the total number of requests to the server. However, if the user decides to be sneaky and disable front-end validation, the server will test the username & password as well.
+Form validation is done on both the front-end and back-end. Front-end form validation allows immediate feedback on whether the username & password meets the requirements and limits the total number of requests to the server. However, in the case that the user decides to be sneaky and disable front-end validation, the server will test the username & password as well.
 
 ## Technology
 
